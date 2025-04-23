@@ -76,6 +76,34 @@
       padding-top: 1rem;
     }
   </style>
+  <script>
+    const movies = [
+      {
+        title: "Minecraft (2025) - Full Movie",
+        desc: "A fan-made adaptation of the iconic game, packed with action and survival drama.",
+        link: "/en/minecraft.html"
+      },
+      {
+        title: "Shrek (2001) - Full HD",
+        desc: "The classic fairytale with a twist.",
+        link: "/en/shrek.html"
+      }
+    ];
+
+    function searchMovies() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const results = movies.filter(movie => movie.title.toLowerCase().includes(query));
+      const container = document.getElementById('movie-results');
+      container.innerHTML = results.length ? '' : '<p>No results found.</p>';
+
+      results.forEach(movie => {
+        const card = document.createElement('div');
+        card.className = 'movie-card';
+        card.innerHTML = `<h2>${movie.title}</h2><p>${movie.desc}</p><a href="${movie.link}">▶ Watch Now</a>`;
+        container.appendChild(card);
+      });
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -83,8 +111,8 @@
   </header>
 
   <div class="search-bar">
-    <input type="text" placeholder="Search for a movie...">
-    <button>Search</button>
+    <input type="text" id="search-input" placeholder="Search for a movie...">
+    <button onclick="searchMovies()">Search</button>
   </div>
 
   <div class="content">
@@ -92,11 +120,7 @@
 
     <p>Simply search a title using the bar above or scroll down to discover new picks.</p>
 
-    <div class="movie-card">
-      <h2>Minecraft (2025) - Full Movie</h2>
-      <p>A fan-made adaptation of the iconic game, packed with action and survival drama.</p>
-      <a href="/en/minecraft.html">▶ Watch Now</a>
-    </div>
+    <div id="movie-results"></div>
 
     <div class="disclaimer">
       <p><strong>Disclaimer:</strong> FilmFinder does not host any files on its servers. All content available on this site is embedded from publicly available third-party sources. This website is for informational and educational purposes only. If you are a copyright owner and believe your rights have been violated – please contact us for removal.</p>
