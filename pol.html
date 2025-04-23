@@ -1,62 +1,82 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Obejrzyj Film Online za Darmo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FilmFinder - Oglądaj Filmy Online</title>
+  <meta name="description" content="Oglądaj najnowsze filmy online całkowicie za darmo. Nowe tytuły codziennie, bez rejestracji!">
+  <meta name="keywords" content="oglądaj filmy online, darmowe filmy, cały film, bez rejestracji, HD, kino, nowe filmy">
   <style>
     body {
-      background-color: #111;
-      color: #fff;
+      background-color: #0e0e0e;
+      color: #f2f2f2;
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 1.5rem;
       text-align: center;
-      padding: 2rem;
     }
-    .container {
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .search-bar {
+      margin: 1rem auto;
       max-width: 600px;
-      margin: auto;
+      display: flex;
+      justify-content: center;
     }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .movie-title {
-      font-size: 1.2rem;
-      margin: 1.5rem 0 0.5rem;
-    }
-    .button {
-      background-color: #e50914;
-      border: none;
-      color: white;
-      padding: 12px 24px;
-      margin: 8px;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .button:hover {
-      background-color: #ff1f3d;
-    }
-    iframe {
-      margin-top: 2rem;
+    .search-bar input {
       width: 100%;
-      height: 360px;
+      padding: 0.75rem;
       border: none;
-      border-radius: 12px;
+      border-radius: 8px 0 0 8px;
+      font-size: 1rem;
+    }
+    .search-bar button {
+      padding: 0.75rem 1.5rem;
+      background-color: #e50914;
+      color: #fff;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .content {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .disclaimer {
+      font-size: 0.9rem;
+      color: #aaaaaa;
+      margin-top: 3rem;
+      border-top: 1px solid #333;
+      padding-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🎬 Oglądaj filmy online za darmo</h1>
-    <p class="movie-title">Shrek – Cały Film PL HD</p>
-    <a class="button" href="https://shrinkme.io/przykladowy-link-1" target="_blank">Obejrzyj teraz</a>
-    <a class="button" href="https://shrinkme.io/przykladowy-link-2" target="_blank">Lustro</a>
+  <header>
+    <h1>🎬 FilmFinder - Oglądaj Filmy Online za Darmo</h1>
+  </header>
 
-    <iframe src="https://filemoon.sx/e/example123pl" allowfullscreen></iframe>
+  <div class="search-bar">
+    <input type="text" placeholder="Szukaj filmu...">
+    <button>Szukaj</button>
+  </div>
+
+  <div class="content">
+    <p>Witamy na FilmFinder – Twoim źródle darmowych filmów online! Codziennie aktualizujemy naszą bazę, dodając najnowsze hity kinowe, klasyki oraz niszowe produkcje – wszystko dostępne bez logowania i rejestracji.</p>
+
+    <p>Po prostu wyszukaj tytuł w lupce powyżej lub przewijaj dalej, aby odkrywać nowe propozycje.</p>
+
+    <div class="disclaimer">
+      <p><strong>Disclaimer:</strong> FilmFinder nie przechowuje żadnych plików na swoich serwerach. Wszystkie treści dostępne na stronie są osadzone z publicznie dostępnych źródeł stron trzecich. Strona ma charakter informacyjno-edukacyjny. Jeśli jesteś właścicielem praw autorskich i uważasz, że naruszyliśmy Twoje prawa – skontaktuj się z nami, a materiał zostanie usunięty.</p>
+    </div>
   </div>
 </body>
 </html>
