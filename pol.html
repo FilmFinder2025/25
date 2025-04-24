@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FilmFinder - Oglądaj Filmy Online</title>
-  <meta name="description" content="Oglądaj najnowsze filmy online całkowicie za darmo. Nowe tytuły codziennie, bez rejestracji!">
-  <meta name="keywords" content="oglądaj filmy online, darmowe filmy, cały film, bez rejestracji, HD, kino, nowe filmy">
+  <title>FilmFinder - Oglądaj Filmy Online za Darmo</title>
+  <meta name="description" content="Oglądaj najnowsze filmy online za darmo. Codzienne aktualizacje, bez rejestracji!">
+  <meta name="keywords" content="oglądaj filmy online, darmowe filmy, cały film, bez rejestracji, HD, kino, nowe filmy, Minecraft">
   <style>
     body {
       background-color: #0e0e0e;
@@ -28,6 +28,7 @@
       max-width: 600px;
       display: flex;
       justify-content: center;
+      position: relative;
     }
     .search-bar input {
       width: 100%;
@@ -45,10 +46,45 @@
       font-size: 1rem;
       cursor: pointer;
     }
+    #suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #1a1a1a;
+      z-index: 10;
+      border-radius: 0 0 8px 8px;
+      border-top: 1px solid #333;
+    }
+    #suggestions div {
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+    #suggestions div:hover {
+      background-color: #2a2a2a;
+    }
     .content {
       max-width: 800px;
       margin: 2rem auto;
       padding: 0 1rem;
+    }
+    .movie-card {
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 1rem;
+      margin: 1rem 0;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .movie-card h2 {
+      margin: 0 0 0.5rem 0;
+      color: #e50914;
+    }
+    .movie-card a {
+      color: #61dafb;
+      text-decoration: none;
+    }
+    .movie-card a:hover {
+      text-decoration: underline;
     }
     .disclaimer {
       font-size: 0.9rem;
@@ -58,6 +94,54 @@
       padding-top: 1rem;
     }
   </style>
+  <script>
+    const movies = [
+      {
+        title: "Minecraft (2025) - Pełny Film",
+        desc: "Fanowska adaptacja kultowej gry, pełna akcji i dramatów przetrwania.",
+        link: "/pol/minecraft.html"
+      },
+      {
+        title: "Shrek (2001) - Cały Film HD",
+        desc: "Klasyczna bajka z humorem i przygodą.",
+        link: "/pol/shrek.html"
+      }
+    ];
+
+    function searchMovies() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const results = movies.filter(movie => movie.title.toLowerCase().includes(query));
+      const container = document.getElementById('movie-results');
+      container.innerHTML = results.length ? '' : '<p>Brak wyników.</p>';
+
+      results.forEach(movie => {
+        const card = document.createElement('div');
+        card.className = 'movie-card';
+        card.innerHTML = `<h2>${movie.title}</h2><p>${movie.desc}</p><a href="${movie.link}">▶ Oglądaj Teraz</a>`;
+        container.appendChild(card);
+      });
+    }
+
+    function showSuggestions() {
+      const input = document.getElementById('search-input');
+      const suggestions = document.getElementById('suggestions');
+      const query = input.value.toLowerCase();
+      suggestions.innerHTML = '';
+      if (!query) return;
+
+      const matches = movies.filter(movie => movie.title.toLowerCase().includes(query));
+      matches.forEach(movie => {
+        const item = document.createElement('div');
+        item.textContent = movie.title;
+        item.onclick = () => {
+          input.value = movie.title;
+          suggestions.innerHTML = '';
+          searchMovies();
+        };
+        suggestions.appendChild(item);
+      });
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -65,17 +149,20 @@
   </header>
 
   <div class="search-bar">
-    <input type="text" placeholder="Szukaj filmu...">
-    <button>Szukaj</button>
+    <input type="text" id="search-input" placeholder="Wyszukaj film..." oninput="showSuggestions()">
+    <button onclick="searchMovies()">Szukaj</button>
+    <div id="suggestions"></div>
   </div>
 
   <div class="content">
-    <p>Witamy na FilmFinder – Twoim źródle darmowych filmów online! Codziennie aktualizujemy naszą bazę, dodając najnowsze hity kinowe, klasyki oraz niszowe produkcje – wszystko dostępne bez logowania i rejestracji.</p>
+    <p>Witamy na FilmFinder – Twoim źródle darmowych filmów online! Codziennie aktualizujemy naszą kolekcję najnowszych hitów, klasyków i perełek – wszystko dostępne bez logowania i rejestracji.</p>
 
-    <p>Po prostu wyszukaj tytuł w lupce powyżej lub przewijaj dalej, aby odkrywać nowe propozycje.</p>
+    <p>Wystarczy wpisać tytuł w pasku wyszukiwania powyżej lub przeglądać dostępne propozycje poniżej.</p>
+
+    <div id="movie-results"></div>
 
     <div class="disclaimer">
-      <p><strong>Disclaimer:</strong> FilmFinder nie przechowuje żadnych plików na swoich serwerach. Wszystkie treści dostępne na stronie są osadzone z publicznie dostępnych źródeł stron trzecich. Strona ma charakter informacyjno-edukacyjny. Jeśli jesteś właścicielem praw autorskich i uważasz, że naruszyliśmy Twoje prawa – skontaktuj się z nami, a materiał zostanie usunięty.</p>
+      <p><strong>Uwaga prawna:</strong> FilmFinder nie hostuje żadnych plików na swoich serwerach. Cała zawartość tej strony pochodzi z ogólnodostępnych źródeł zewnętrznych i jest osadzona w formie odnośników. Strona ma charakter informacyjny i edukacyjny. Jeśli jesteś właścicielem praw autorskich i uważasz, że Twoje prawa zostały naruszone – skontaktuj się z nami w celu usunięcia treści.</p>
     </div>
   </div>
 </body>
