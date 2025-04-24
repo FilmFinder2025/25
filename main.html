@@ -28,6 +28,7 @@
       max-width: 600px;
       display: flex;
       justify-content: center;
+      position: relative;
     }
     .search-bar input {
       width: 100%;
@@ -44,6 +45,23 @@
       border-radius: 0 8px 8px 0;
       font-size: 1rem;
       cursor: pointer;
+    }
+    #suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #1a1a1a;
+      z-index: 10;
+      border-radius: 0 0 8px 8px;
+      border-top: 1px solid #333;
+    }
+    #suggestions div {
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+    #suggestions div:hover {
+      background-color: #2a2a2a;
     }
     .content {
       max-width: 800px;
@@ -81,12 +99,12 @@
       {
         title: "Minecraft (2025) - Full Movie",
         desc: "A fan-made adaptation of the iconic game, packed with action and survival drama.",
-        link: "/en/minecraft.html"
+        link: "/main/minecraft.html"
       },
       {
         title: "Shrek (2001) - Full HD",
         desc: "The classic fairytale with a twist.",
-        link: "/en/shrek.html"
+        link: "/main/shrek.html"
       }
     ];
 
@@ -103,6 +121,26 @@
         container.appendChild(card);
       });
     }
+
+    function showSuggestions() {
+      const input = document.getElementById('search-input');
+      const suggestions = document.getElementById('suggestions');
+      const query = input.value.toLowerCase();
+      suggestions.innerHTML = '';
+      if (!query) return;
+
+      const matches = movies.filter(movie => movie.title.toLowerCase().includes(query));
+      matches.forEach(movie => {
+        const item = document.createElement('div');
+        item.textContent = movie.title;
+        item.onclick = () => {
+          input.value = movie.title;
+          suggestions.innerHTML = '';
+          searchMovies();
+        };
+        suggestions.appendChild(item);
+      });
+    }
   </script>
 </head>
 <body>
@@ -111,8 +149,9 @@
   </header>
 
   <div class="search-bar">
-    <input type="text" id="search-input" placeholder="Search for a movie...">
+    <input type="text" id="search-input" placeholder="Search for a movie..." oninput="showSuggestions()">
     <button onclick="searchMovies()">Search</button>
+    <div id="suggestions"></div>
   </div>
 
   <div class="content">
