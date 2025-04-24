@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FilmFinder - Oglądaj Filmy Online za Darmo</title>
-  <meta name="description" content="Oglądaj najnowsze filmy online za darmo. Codzienne aktualizacje, bez rejestracji!">
-  <meta name="keywords" content="oglądaj filmy online, darmowe filmy, cały film, bez rejestracji, HD, kino, nowe filmy, Minecraft">
+  <title>FilmFinder - Oglądaj Filmy Online</title>
+  <meta name="description" content="Oglądaj najnowsze filmy online za darmo. Codzienne nowości, bez rejestracji!">
+  <meta name="keywords" content="oglądaj filmy online, darmowe filmy, cały film, bez logowania, HD, kino, nowe filmy, Minecraft">
   <style>
     body {
       background-color: #0e0e0e;
@@ -95,18 +95,13 @@
     }
   </style>
   <script>
-    const movies = [
-      {
-        title: "Minecraft (2025) - Pełny Film",
-        desc: "Fanowska adaptacja kultowej gry, pełna akcji i dramatów przetrwania.",
-        link: "/pol/minecraft.html"
-      },
-      {
-        title: "Shrek (2001) - Cały Film HD",
-        desc: "Klasyczna bajka z humorem i przygodą.",
-        link: "/pol/shrek.html"
-      }
-    ];
+    let movies = [];
+
+    fetch('/pol/movies_pol.json')
+      .then(response => response.json())
+      .then(data => {
+        movies = data;
+      });
 
     function searchMovies() {
       const query = document.getElementById('search-input').value.toLowerCase();
@@ -117,7 +112,7 @@
       results.forEach(movie => {
         const card = document.createElement('div');
         card.className = 'movie-card';
-        card.innerHTML = `<h2>${movie.title}</h2><p>${movie.desc}</p><a href="${movie.link}">▶ Oglądaj Teraz</a>`;
+        card.innerHTML = `<h2>${movie.title}</h2><p>${movie.desc}</p><a href="${movie.link}">▶ Oglądaj teraz</a>`;
         container.appendChild(card);
       });
     }
@@ -145,7 +140,7 @@
 </head>
 <body>
   <header>
-    <h1>🎬 FilmFinder - Oglądaj Filmy Online za Darmo</h1>
+    <h1>🎬 FilmFinder - Oglądaj Filmy Online</h1>
   </header>
 
   <div class="search-bar">
@@ -155,14 +150,14 @@
   </div>
 
   <div class="content">
-    <p>Witamy na FilmFinder – Twoim źródle darmowych filmów online! Codziennie aktualizujemy naszą kolekcję najnowszych hitów, klasyków i perełek – wszystko dostępne bez logowania i rejestracji.</p>
+    <p>Witamy na FilmFinder – Twoim źródle darmowych filmów online! Codziennie nowe hity, klasyki i perełki kina – bez logowania i rejestracji.</p>
 
-    <p>Wystarczy wpisać tytuł w pasku wyszukiwania powyżej lub przeglądać dostępne propozycje poniżej.</p>
+    <p>Wpisz tytuł filmu w wyszukiwarce powyżej lub przeglądaj nowe propozycje poniżej.</p>
 
     <div id="movie-results"></div>
 
     <div class="disclaimer">
-      <p><strong>Uwaga prawna:</strong> FilmFinder nie hostuje żadnych plików na swoich serwerach. Cała zawartość tej strony pochodzi z ogólnodostępnych źródeł zewnętrznych i jest osadzona w formie odnośników. Strona ma charakter informacyjny i edukacyjny. Jeśli jesteś właścicielem praw autorskich i uważasz, że Twoje prawa zostały naruszone – skontaktuj się z nami w celu usunięcia treści.</p>
+      <p><strong>Informacja prawna:</strong> FilmFinder nie przechowuje żadnych plików na swoich serwerach. Wszystkie treści są osadzone z publicznie dostępnych źródeł zewnętrznych. Strona służy wyłącznie celom informacyjnym i edukacyjnym. Jeśli jesteś właścicielem praw autorskich i uważasz, że Twoje prawa zostały naruszone – skontaktuj się z nami w celu usunięcia treści.</p>
     </div>
   </div>
 </body>
