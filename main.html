@@ -95,18 +95,14 @@
     }
   </style>
   <script>
-    const movies = [
-      {
-        title: "Minecraft (2025) - Full Movie",
-        desc: "A fan-made adaptation of the iconic game, packed with action and survival drama.",
-        link: "/main/minecraft.html"
-      },
-      {
-        title: "Shrek (2001) - Full HD",
-        desc: "The classic fairytale with a twist.",
-        link: "/main/shrek.html"
-      }
-    ];
+    let movies = [];
+
+    async function loadMovies() {
+      const response = await fetch('/en/movies_en.json');
+      movies = await response.json();
+      showSuggestions();
+      searchMovies();
+    }
 
     function searchMovies() {
       const query = document.getElementById('search-input').value.toLowerCase();
@@ -141,6 +137,8 @@
         suggestions.appendChild(item);
       });
     }
+
+    window.onload = loadMovies;
   </script>
 </head>
 <body>
